@@ -2,7 +2,13 @@ class solr::packages {
     package {
 		'java':
 			ensure => present,
-			name => 'openjdk-6-jre';
+			name => $operatingsystem ? {
+				'Centos' => $operatingsystemrelease ? {
+					'6.0' => "java-1.6.0-openjdk.$hardwaremodel",
+					'*' => 'openjdk-6-jre',
+				},
+				'*' => 'openjdk-6-jre',
+			};
 
 		'solr':
 			ensure => present;

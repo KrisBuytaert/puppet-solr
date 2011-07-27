@@ -13,5 +13,8 @@ class solr::packages {
 		'solr':
 			ensure => present;
 
+		'tomcat':
+			ensure => present,
+			name => 'tomcat6';
 	}
 }

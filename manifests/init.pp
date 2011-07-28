@@ -1,6 +1,8 @@
 import 'classes/*'
 
-class solr {
+class solr (
+	$backend = 'tomcat'
+) {
 	include solr::packages
 	include solr::config
 	include solr::services

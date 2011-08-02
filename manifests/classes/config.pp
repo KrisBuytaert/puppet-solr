@@ -6,7 +6,7 @@ class solr::config {
 			owner => "root",
 			group => "root",
 			mode  => "0755",
-			content => 'solr/solr.init';
+			content => template('solr/solr.init.erb');
 
 		'solr conf':
 			ensure => present,

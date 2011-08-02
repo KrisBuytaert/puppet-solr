@@ -1,33 +1,11 @@
-class solr {
+import 'classes/*'
 
-   file {
-	"/etc/init.d/solr":
-		owner => "root",
-		group => "root",
-		ensure => "present",
-		mode  => "0755",
-		source => "puppet:///modules/solr/solr",
-    }
+class solr (
+	$backend = 'tomcat'
+) {
+	include solr::packages
+	include solr::config
+	include solr::services
 
-    package {
-	   "openjdk-6-jre":
-                        alias  => "java",
-                        ensure => present;
-
-   	   "solr":
-                        ensure => present;
-
-	}
-
-
-
-
-    service {"solr":
-        ensure => "running" ,
-        enable => "true",
-	require => File['/etc/init.d/solr'],
-    }
-
-
+	Class['solr::packages'] -> Class['solr::config'] -> Class['solr::services']
 }
-

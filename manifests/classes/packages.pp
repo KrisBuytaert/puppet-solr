@@ -14,7 +14,7 @@ class solr::packages {
 					'6.0' => "java-1.6.0-openjdk.$hardwaremodel",
 					'*' => 'openjdk-6-jre',
 				},
-				'Debian' => 'openjdk-6-jre-headless',
+				'Debian' => 'openjdk-6-jre',
 			};
 	}
 

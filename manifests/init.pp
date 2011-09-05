@@ -3,7 +3,7 @@ import 'classes/*'
 class solr (
 	$backend = 'tomcat'
 ) {
-	Class {
+	class {
 		'solr::packages':
 			before => Class['solr::config'];
 		'solr::config':

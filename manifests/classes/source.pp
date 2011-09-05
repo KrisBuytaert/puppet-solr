@@ -2,13 +2,11 @@ class solr::source {
 	exec {
 		'grab_solr_source':
 			command => 'wget http://apache.belnet.be//lucene/solr/3.3.0/apache-solr-3.3.0.tgz',
-			path => '/usr/bin',
 			creates => '/usr/share/apache-solr-3.3.0.tgz',
 			cwd => '/usr/share';
 
 		'unpack_solr_source':
 			command => 'tar xzvf apache-solr-3.3.0.tgz',
-			path => '/bin',
 			creates => '/usr/share/solr',
 			cwd => '/usr/share',
 			require => Exec['grab_solr_source'];

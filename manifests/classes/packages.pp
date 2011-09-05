@@ -35,6 +35,6 @@ class solr::packages {
 	}
 
 	if $operatingsystem == Debian {
-		realize(Package["solr-$solr::backend"], Aptrepo['unstable'])
+		realize(Package["solr-$solr::backend"])
 	}
 }

@@ -3,9 +3,11 @@ import 'classes/*'
 class solr (
 	$backend = 'tomcat'
 ) {
-	include solr::packages
-	include solr::config
-	include solr::services
-
-	Class['solr::packages'] -> Class['solr::config'] -> Class['solr::services']
+	Class {
+		'solr::packages':
+			before => Class['solr::config'];
+		'solr::config':
+			before => Class['solr::services'];
+		'solr::services':;
+	}
 }

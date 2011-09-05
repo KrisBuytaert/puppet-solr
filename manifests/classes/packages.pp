@@ -34,6 +34,8 @@ class solr::packages {
 			ensure => present;
 	}
 
+	realize(Package['tomcat'])
+
 	if $operatingsystem == Debian {
 		realize(Package["solr-$solr::backend"])
 	}

@@ -1,5 +1,5 @@
 class solr::packages {
-    package {
+    @package {
 		'solr':
 			ensure => present,
 			name => $operatingsystem ? {
@@ -16,9 +16,7 @@ class solr::packages {
 				},
 				'Debian' => 'openjdk-6-jre',
 			};
-	}
 
-	@package {
 		'tomcat':
 			ensure => present,
 			name => 'tomcat6';
@@ -34,9 +32,9 @@ class solr::packages {
 			ensure => present;
 	}
 
-	realize(Package['tomcat'])
+	realize(Package['java', 'tomcat'])
 
-	if $operatingsystem == Debian {
-		realize(Package["solr-$solr::backend"])
+	if $operatingsystem != Debian {
+		realize(Package['solr', "solr-$solr::backend"])
 	}
 }

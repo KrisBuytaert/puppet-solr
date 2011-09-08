@@ -7,14 +7,26 @@ class solr::source {
 
 		'unpack_solr_source':
 			command => 'tar xzvf apache-solr-3.3.0.tgz',
-			creates => '/usr/share/solr',
+			creates => '/usr/share/apache-solr-3.3.0',
 			cwd => '/usr/share',
+			unless => "test -d $solr::home",
 			require => Exec['grab_solr_source'];
 
-		'install_solr_into_tomcat':
-			command => 'cp /usr/share/apache-solr-3.3.0/dist/apache-solr-3.3.0.war /var/lib/tomcat6/webapps/solr.war',
-			creates => '/var/lib/tomcat6/webapps/solr.war',
+		'mv_solr_source':
+			command => "mv apache-solr-3.3.0 $solr::home",
+			cwd => '/usr/share',
+			creates => "$solr::home",
 			require => Exec['unpack_solr_source'];
+
+		'install_solr_libs_into_tomcat':
+			command => "cp $solr::home/example/solr -fr /var/lib/tomcat6/",
+			creates => '/var/lib/tomcat6/solr',
+			require => Exec['mv_solr_source'];
+
+		'install_solr_into_tomcat':
+			command => "cp $solr::home/dist/apache-solr-3.3.0.war /var/lib/tomcat6/webapps/solr.war",
+			creates => '/var/lib/tomcat6/webapps/solr.war',
+			require => Exec['install_solr_libs_into_tomcat'];
 	}
 
 	file {

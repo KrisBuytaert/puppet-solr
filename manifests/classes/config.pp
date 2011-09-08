@@ -10,7 +10,7 @@ class solr::config {
 
 		'solr conf':
 			ensure => present,
-			path => '/usr/share/solr/solr.xml',
+			path => "$solr::home/solr.xml",
 			owner => root,
 			group => root,
 			mode => '0755',

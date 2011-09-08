@@ -1,7 +1,8 @@
 import 'classes/*'
 
 class solr (
-	$backend = 'tomcat'
+	$backend = 'tomcat',
+	$home = '/usr/share/solr'
 ) {
 	class {
 		'solr::packages':

@@ -19,7 +19,10 @@ class solr::packages {
 
 		'tomcat':
 			ensure => present,
-			name => 'tomcat6';
+			name => $::operatingsystemrelease ? {
+				default => 'tomcat6',
+				'5.4' => 'tomcat5',
+			};
 
 		'jetty':
 			ensure => present,

@@ -41,8 +41,14 @@ class solr::source {
 
 		'/var/lib/tomcat6/solr':
 			ensure => directory,
-			owner => tomcat6,
-			group => tomcat6,
+			owner => $::operatingsystem ? {
+				default => 'tomcat',
+				debian => 'tomcat6',
+			},
+			group => $::operatingsystem ? {
+				default => 'tomcat',
+				debian => 'tomcat6',
+			},
 			require => Exec['install_solr_libs_into_tomcat'];
 	}
 }

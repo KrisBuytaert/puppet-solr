@@ -2,7 +2,10 @@ class solr::services {
 	service {
 		'solr':
 			ensure => "stopped",
-			enable => "true",
+			enable => $::operatingsystem ? {
+				default => "true",
+				centos => "false",
+			},
 			require => File['solr initscript'];
 
 		'tomcat6':

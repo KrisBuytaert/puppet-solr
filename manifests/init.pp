@@ -5,10 +5,7 @@ class solr (
 	$home = '/usr/share/solr',
 	$tomcat_root = $::operatingsystem ? {
 		default => '/var/lib/tomcat6',
-		centos => $::operatingsystemrelease ? {
-			default => '/usr/share/tomcat6',
-			5.4 => '/usr/share/tomcat5',
-		},
+		centos => '/usr/share/tomcat6',
 	},
 	$tomcat_user = $::operatingsystem ? {
 		default => 'tomcat',

@@ -7,14 +7,11 @@ class solr (
 	class {
 		'solr::packages':
 			before => Class['solr::config'];
+		'solr::source':
+			require => Class['solr::packages'];
 		'solr::config':
 			before => Class['solr::services'];
 		'solr::services':;
-	}
-
-	class {
-		'solr::source':
-			require => Class['solr::packages'];
 	}
 
 	Exec {

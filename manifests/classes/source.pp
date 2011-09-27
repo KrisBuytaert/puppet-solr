@@ -24,7 +24,7 @@ class solr::source {
 			require => Exec['mv_solr_source'];
 
 		'install_solr_into_tomcat':
-			command => "cp $solr::home/dist/apache-solr-3.3.0.war /var/lib/tomcat6/webapps/solr.war",
+			command => "cp $solr::home/dist/apache-solr-3.3.0.war $solr::tomcat_root/webapps/solr.war",
 			creates => "$solr::tomcat_root/webapps/solr.war",
 			require => Exec['install_solr_libs_into_tomcat'];
 	}

@@ -12,11 +12,9 @@ class solr (
 		'solr::services':;
 	}
 
-	if $::operatingsystem == debian {
-		class {
-			'solr::source':
-				require => Class['solr::packages'];
-		}
+	class {
+		'solr::source':
+			require => Class['solr::packages'];
 	}
 
 	Exec {

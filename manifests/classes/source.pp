@@ -19,13 +19,13 @@ class solr::source {
 			require => Exec['unpack_solr_source'];
 
 		'install_solr_libs_into_tomcat':
-			command => "cp $solr::home/example/solr -fr /var/lib/tomcat6/",
-			creates => '/var/lib/tomcat6/solr',
+			command => "cp $solr::home/example/solr -fr $solr::tomcat_root",
+			creates => "$solr::tomcat_root/solr",
 			require => Exec['mv_solr_source'];
 
 		'install_solr_into_tomcat':
 			command => "cp $solr::home/dist/apache-solr-3.3.0.war /var/lib/tomcat6/webapps/solr.war",
-			creates => '/var/lib/tomcat6/webapps/solr.war',
+			creates => "$solr::tomcat_root/webapps/solr.war",
 			require => Exec['install_solr_libs_into_tomcat'];
 	}
 
@@ -39,16 +39,10 @@ class solr::source {
 			content => template('solr/tomcat6.default.erb'),
 			require => Package['tomcat'];
 
-		'/var/lib/tomcat6/solr':
+		"$solr::tomcat_root/solr":
 			ensure => directory,
-			owner => $::operatingsystem ? {
-				default => 'tomcat',
-				debian => 'tomcat6',
-			},
-			group => $::operatingsystem ? {
-				default => 'tomcat',
-				debian => 'tomcat6',
-			},
+			owner => $solr::tomcat_user,
+			group => $solr::tomcat_group,
 			require => Exec['install_solr_libs_into_tomcat'];
 	}
 }

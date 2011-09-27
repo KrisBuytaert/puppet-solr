@@ -8,7 +8,11 @@ class solr::services {
 			},
 			require => File['solr initscript'];
 
-		'tomcat6':
+		'tomcat':
+			name => $::operatingsystemrelease ? {
+				default => 'tomcat6',
+				5.4 => 'tomcat5',
+			},
 			ensure => running,
 			enable => true,
 			require => File['tomcat6.default'];

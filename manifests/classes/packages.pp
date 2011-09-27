@@ -16,7 +16,7 @@ class solr::packages {
 
 		'tomcat':
 			ensure => present,
-			name => 'tomcat6',
+			name => 'tomcat6';
 
 		'jetty':
 			ensure => present,

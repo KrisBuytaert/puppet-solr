@@ -14,7 +14,8 @@ class solr (
 	$tomcat_group = $::operatingsystem ? {
 		default => 'tomcat',
 		debian => 'tomcat6',
-	}
+	},
+	$version = '1.4.1'
 ) {
 	class {
 		'solr::packages':

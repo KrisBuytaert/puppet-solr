@@ -1,19 +1,19 @@
 class solr::source {
 	exec {
 		'grab_solr_source':
-			command => "wget http://apache.belnet.be//lucene/solr/$version/apache-solr-$version.tgz",
-			creates => "/usr/share/apache-solr-$version.tgz",
+			command => "wget http://apache.belnet.be//lucene/solr/${solr::version}/apache-solr-${solr::version}.tgz",
+			creates => "/usr/share/apache-solr-${solr::version}.tgz",
 			cwd => '/usr/share';
 
 		'unpack_solr_source':
-			command => "tar xzvf apache-solr-$version.tgz",
-			creates => "/usr/share/apache-solr-$version",
+			command => "tar xzvf apache-solr-${solr::version}.tgz",
+			creates => "/usr/share/apache-solr-${solr::version}",
 			cwd => '/usr/share',
 			unless => "test -d $solr::home",
 			require => Exec['grab_solr_source'];
 
 		'mv_solr_source':
-			command => "mv apache-solr-$version $solr::home",
+			command => "mv apache-solr-${solr::version} $solr::home",
 			cwd => '/usr/share',
 			creates => "$solr::home",
 			require => Exec['unpack_solr_source'];
@@ -24,7 +24,7 @@ class solr::source {
 			require => Exec['mv_solr_source'];
 
 		'install_solr_into_tomcat':
-			command => "cp $solr::home/dist/apache-solr-$version.war $solr::tomcat_root/webapps/solr.war",
+			command => "cp $solr::home/dist/apache-solr-${solr::version}.war $solr::tomcat_root/webapps/solr.war",
 			creates => "$solr::tomcat_root/webapps/solr.war",
 			require => Exec['install_solr_libs_into_tomcat'];
 	}

@@ -14,6 +14,7 @@ class solr::config {
 			owner => root,
 			group => root,
 			mode => '0755',
+                        require => Class['solr::source'],
 			content => template('solr/solr.xml.erb');
 	}
 }

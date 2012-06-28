@@ -1,5 +1,3 @@
-import 'classes/*'
-
 class solr (
 	$backend = 'tomcat',
 	$home = '/usr/share/solr',

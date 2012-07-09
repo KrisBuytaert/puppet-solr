@@ -15,8 +15,6 @@ class solr (
 	},
 	$version = '1.4.1'
 ) {
-  motd::register { 'solr': }
-
 	class {
 		'solr::packages':
 			before => Class['solr::config'];

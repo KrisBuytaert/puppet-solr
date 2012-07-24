@@ -11,7 +11,7 @@ class solr::packages {
 			ensure => present,
 			name => $operatingsystem ? {
 				'Centos' => $operatingsystemrelease ? {
-					/6\.[0-2]/ => "java-1.6.0-openjdk.$hardwaremodel",
+					/6\.[0-3]/ => "java-1.6.0-openjdk.$hardwaremodel",
 					'*' => 'openjdk-6-jre',
 				},
 				'Debian' => 'openjdk-6-jre-headless',

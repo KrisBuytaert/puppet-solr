@@ -13,7 +13,7 @@ class solr (
 		default => 'tomcat',
 		debian => 'tomcat6',
 	},
-	$version = '1.4.1'
+	$version = '3.6.1'
 ) {
 	class {
 		'solr::packages':

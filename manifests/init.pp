@@ -1,11 +1,24 @@
-import 'classes/*'
-
 class solr (
-	$backend = 'tomcat'
-) {
-	include solr::packages
-	include solr::config
-	include solr::services
+  $backend = 'tomcat',
+  $home = '/usr/share/solr',
+  $tomcat_root = $::operatingsystem ? {
+    default    => '/var/lib/tomcat6',
+    centos => '/usr/share/tomcat6',
+  },
+  $tomcat_user = $::operatingsystem ? {
+    default    => 'tomcat',
+    debian => 'tomcat6',
+  },
+  $tomcat_group = $::operatingsystem ? {
+    default    => 'tomcat',
+    debian => 'tomcat6',
+  },
+  $version = '3.6.1'
+)
+{
+  include solr::packages
+  include solr::config
+  include solr::services
 
-	Class['solr::packages'] -> Class['solr::config'] -> Class['solr::services']
+  Class['solr::packages'] -> Class['solr::config'] -> Class['solr::services']
 }

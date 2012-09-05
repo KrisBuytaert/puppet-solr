@@ -1,5 +1,6 @@
 class solr::config {
   file {
+    # Not actually using this anymore as we are deploying in tomcat
     'solr initscript':
       ensure => "present",
       path => '/etc/init.d/solr',
@@ -10,11 +11,22 @@ class solr::config {
 
     'solr conf':
       ensure => present,
-      path => "$solr::home/solr.xml",
+      path => '/usr/share/solr/solr.xml',
       owner => root,
       group => root,
       mode => '0755',
-                        require => Class['solr::source'],
       content => template('solr/solr.xml.erb');
   }
+  $warlocation = "${solr::home}/dist/apache-solr-${solr::version}.war"
+
+  file { '/etc/tomcat6/Catalina/localhost/solr.xml':
+      ensure => present,
+      owner => root,
+      group => root,
+      mode => '0755',
+      content => template('solr/Catalina.solr.xml.erb'),
+  }
+
+
 }
+

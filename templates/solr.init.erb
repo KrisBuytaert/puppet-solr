@@ -8,7 +8,7 @@
 NAME="solr"
 PIDFILE="/var/run/solr-production.pid"
 LOG_FILE="/var/log/solr-production.log"
-SOLR_DIR="<%= scope.lookupvar('solr::home') %>/example"
+SOLR_DIR="<%= scope.lookupvar('solr::root') %>/example"
 JAVA_OPTIONS="-Xmx1024m -DSTOP.PORT=8079 -DSTOP.KEY=stopkey -jar start.jar"
 JAVA="/usr/bin/java"
 

@@ -1,17 +1,18 @@
 class solr (
   $backend = 'tomcat',
-  $home = '/usr/share/solr',
+  $root = '/usr/share/solr',
+  $home = '/var/lib/solr',
   $tomcat_root = $::operatingsystem ? {
-    default    => '/var/lib/tomcat6',
-    centos => '/usr/share/tomcat6',
+    default => '/var/lib/tomcat6',
+    centos  => '/usr/share/tomcat6',
   },
   $tomcat_user = $::operatingsystem ? {
-    default    => 'tomcat',
-    debian => 'tomcat6',
+    default => 'tomcat',
+    debian  => 'tomcat6',
   },
   $tomcat_group = $::operatingsystem ? {
-    default    => 'tomcat',
-    debian => 'tomcat6',
+    default => 'tomcat',
+    debian  => 'tomcat6',
   },
   $version = '3.6.1'
 )

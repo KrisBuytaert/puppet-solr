@@ -14,7 +14,11 @@ class solr (
     default => 'tomcat',
     debian  => 'tomcat6',
   },
-  $version = '3.6.1'
+  $version = '3.6.1',
+  $persistent = 'false',
+  $shareschema = 'true',
+  $masterurl = 'http://solrmaster:8080/solr/'
+
 )
 {
   include solr::packages

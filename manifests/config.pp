@@ -20,7 +20,7 @@ class solr::config {
     ensure  => 'present',
     owner   => 'root',
     group   => 'root',
-    mode    => '0755',
+    mode    => '0644',
     content => template('solr/Catalina.solr.xml.erb');
   }
 
@@ -31,7 +31,7 @@ class solr::config {
     # path    => "${solr::home}/solr.xml",
     owner   => 'root',
     group   => 'root',
-    mode    => '0755',
+    mode    => '0644',
   }
   concat::fragment {'header':
     target  => "${solr::home}/solr.xml",
@@ -46,4 +46,3 @@ class solr::config {
   }
 
 }
-

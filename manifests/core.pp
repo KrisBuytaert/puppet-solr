@@ -18,4 +18,3 @@ define solr::core (
   }
 
 }
-

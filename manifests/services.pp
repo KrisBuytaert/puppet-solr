@@ -6,8 +6,8 @@ class solr::services {
   #    require => File['solr initscript'];
   #}
   service { 'tomcat6':
-    ensure   => 'running',
-    enable => 'true',
+    ensure => 'running',
+    enable => true,
   }
 
 }

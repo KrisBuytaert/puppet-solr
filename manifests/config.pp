@@ -8,10 +8,10 @@ class solr::config {
       group   => 'root',
       mode    => '0755',
       content => template('solr/solr.init.erb');
-    "${solr::home}":
+    $solr::home:
       ensure  => 'directory',
-      owner   => "${solr::tomcat_user}",
-      group   => "${solr::tomcat_group}",
+      owner   => $solr::tomcat_user,
+      group   => $solr::tomcat_group,
       mode    => '0755';
   }
   $warlocation = "${solr::root}/dist/apache-solr-${solr::version}.war"
@@ -29,9 +29,9 @@ class solr::config {
   include concat::setup
   concat {"${solr::home}/solr.xml":
     # path    => "${solr::home}/solr.xml",
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
+    owner => 'root',
+    group => 'root',
+    mode  => '0644',
   }
   concat::fragment {'header':
     target  => "${solr::home}/solr.xml",

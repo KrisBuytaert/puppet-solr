@@ -15,8 +15,8 @@ class solr (
     debian  => 'tomcat6',
   },
   $version = '3.6.1',
-  $persistent = 'false',
-  $shareschema = 'true',
+  $persistent = false,
+  $shareschema = true,
   $masterurl = 'http://solrmaster:8080/solr/'
 
 )
